@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignToDishes extends Migration
+class AddForeignToDishesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AddForeignToDishes extends Migration
     public function up()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->unsignedBigInteger('restaurant_id')->after('id');
-
-            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -28,8 +27,9 @@ class AddForeignToDishes extends Migration
     public function down()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->dropForeign('dishes_restaurant_id_foreign');
-            $table->dropColumn('restaurant_id');
+            $table->dropForeign('dishes_user_id_foreign');
+            $table->dropColumn('user_id');
+
         });
     }
 }
