@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -68,6 +69,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // proviamo a integrare la cover caricata dallo users
+        if ($data['cover']) {
+            $cover = Storage::put('covers', $data['cover']);
+            $data['cover'] = $cover;
+        }
+        // non funziona - ho cambiato public nella prima riga filesystem
+
         return User::create([
             'restaurant_name' => $data['restaurant_name'],
             'email' => $data['email'],
