@@ -75,6 +75,7 @@ class RegisterController extends Controller
             $data['cover'] = $cover;
         }
         // non funziona - ho cambiato public nella prima riga filesystem
+        // ora sì
 
         return User::create([
             'restaurant_name' => $data['restaurant_name'],
