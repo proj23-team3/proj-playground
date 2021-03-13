@@ -53,6 +53,10 @@ class RegisterController extends Controller
             'restaurant_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address' => ['required'],
+            'vat_number' => ['required', 'unique:users'],
+            'shipping_costs' => ['nullable'],
+            'cover' => ['nullable'],
         ]);
     }
 
@@ -68,6 +72,10 @@ class RegisterController extends Controller
             'restaurant_name' => $data['restaurant_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'address' => $data['address'],
+            'vat_number' => $data['vat_number'],
+            'shipping_costs' => $data['shipping_costs'],
+            'cover' => isset($data['cover']) ? $data['cover'] : asset('img/undraw_Chef_cu0r.png'),
         ]);
     }
 }
